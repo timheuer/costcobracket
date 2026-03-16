@@ -1,735 +1,1097 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kirkland Signature 2026 Bracket</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirkland Signature 2026 Bracket</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(180deg, #1a1a4e 0%, #2a2a6e 30%, #e8e8f0 60%, #d0d0e8 100%);
-    min-height: 100vh;
-    color: #222;
-  }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(180deg, #1a1a4e 0%, #2a2a6e 30%, #e8e8f0 60%, #d0d0e8 100%);
+            min-height: 100vh;
+            color: #222;
+        }
 
-  header {
-    text-align: center;
-    padding: 20px 10px 10px;
-  }
+        header {
+            text-align: center;
+            padding: 20px 10px 10px;
+        }
 
-  .logo {
-    background: #e31837;
-    color: #fff;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 1.6rem;
-    display: inline-block;
-    padding: 6px 18px 2px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border-radius: 4px;
-    line-height: 1;
-  }
-  .logo .sig {
-    font-style: italic;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    display: block;
-    text-align: right;
-    margin-top: -2px;
-    font-weight: 400;
-  }
+        .logo {
+            background: #e31837;
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            display: inline-block;
+            padding: 6px 18px 2px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            line-height: 1;
+        }
 
-  .year-title {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: #e31837;
-    margin-top: 6px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    letter-spacing: 3px;
-  }
+        .logo .sig {
+            font-style: italic;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            display: block;
+            text-align: right;
+            margin-top: -2px;
+            font-weight: 400;
+        }
 
-  /* Bracket container */
-  .bracket-wrapper {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 10px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+        .year-title {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #e31837;
+            margin-top: 6px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            letter-spacing: 3px;
+        }
 
-  .bracket {
-    display: flex;
-    align-items: stretch;
-    min-width: 900px;
-    position: relative;
-  }
+        /* Bracket container */
+        .bracket-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
 
-  /* Round columns */
-  .round {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex: 1;
-    min-width: 0;
-  }
+        .bracket {
+            display: flex;
+            align-items: stretch;
+            min-width: 900px;
+            position: relative;
+        }
 
-  .round-label {
-    text-align: center;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 0.7rem;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-    padding-top: 4px;
-  }
+        /* Round columns */
+        .round {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+            min-width: 0;
+        }
 
-  /* Region labels */
-  .region-labels {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 10px;
-  }
+        .round-label {
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 0.7rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            padding-top: 4px;
+        }
 
-  .region-group {
-    text-align: center;
-    flex: 1;
-  }
+        /* Region labels */
+        .region-labels {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
 
-  .region-name {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-align: center;
-    padding: 4px 0;
-  }
+        .region-group {
+            text-align: center;
+            flex: 1;
+        }
 
-  .region-name.region-top {
-    color: #fff;
-  }
+        .region-name {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            padding: 4px 0;
+        }
 
-  .region-name.region-bottom {
-    color: #222;
-  }
+        .region-name.region-top {
+            color: #fff;
+        }
 
-  /* Matchup */
-  .matchup {
-    display: flex;
-    flex-direction: column;
-    margin: 4px 2px;
-    position: relative;
-  }
+        .region-name.region-bottom {
+            color: #222;
+        }
 
-  .matchup-spacer {
-    flex: 1;
-  }
+        /* Matchup */
+        .matchup {
+            display: flex;
+            flex-direction: column;
+            margin: 4px 2px;
+            position: relative;
+        }
 
-  .team {
-    padding: 8px 10px;
-    margin: 1px 0;
-    background: #fff;
-    border: 2px solid #ccc;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.78rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    text-align: center;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    white-space: normal;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    min-height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1.15;
-  }
+        .matchup-spacer {
+            flex: 1;
+        }
 
-  .team:hover:not(.locked):not(.empty) {
-    border-color: #e31837;
-    background: #fff5f5;
-    transform: scale(1.03);
-  }
+        .team {
+            padding: 8px 10px;
+            margin: 1px 0;
+            background: #fff;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-align: center;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.15;
+        }
 
-  .team.selected {
-    background: #e31837;
-    color: #fff;
-    border-color: #c41230;
-    font-weight: 700;
-  }
+        .team:hover:not(.locked):not(.empty) {
+            border-color: #e31837;
+            background: #fff5f5;
+            transform: scale(1.03);
+        }
 
-  .team.eliminated {
-    opacity: 0.35;
-    text-decoration: line-through;
-    cursor: default;
-  }
+        .team.selected {
+            background: #e31837;
+            color: #fff;
+            border-color: #c41230;
+            font-weight: 700;
+        }
 
-  .team.empty {
-    background: #f0f0f0;
-    border-color: #ddd;
-    color: #aaa;
-    cursor: default;
-    font-style: italic;
-  }
+        .team.eliminated {
+            opacity: 0.35;
+            text-decoration: line-through;
+            cursor: default;
+        }
 
-  .team.locked {
-    cursor: default;
-  }
+        .team.empty {
+            background: #f0f0f0;
+            border-color: #ddd;
+            color: #aaa;
+            cursor: default;
+            font-style: italic;
+        }
 
-  .team.winner-glow {
-    animation: glow 1.5s ease-in-out infinite alternate;
-    background: linear-gradient(135deg, #ffd700, #ffec80);
-    border-color: #daa520;
-    color: #333;
-    font-weight: 700;
-    font-size: 0.9rem;
-  }
+        .team.locked {
+            cursor: default;
+        }
 
-  @keyframes glow {
-    from { box-shadow: 0 0 8px #ffd700, 0 0 16px rgba(255,215,0,0.4); }
-    to { box-shadow: 0 0 16px #ffd700, 0 0 32px rgba(255,215,0,0.6); }
-  }
+        .team.winner-glow {
+            animation: glow 1.5s ease-in-out infinite alternate;
+            background: linear-gradient(135deg, #ffd700, #ffec80);
+            border-color: #daa520;
+            color: #333;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
 
-  /* Trophy */
-  .trophy-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 70px;
-    padding: 0 4px;
-  }
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 8px #ffd700, 0 0 16px rgba(255, 215, 0, 0.4);
+            }
 
-  .trophy {
-    font-size: 2.5rem;
-    margin-bottom: 4px;
-  }
+            to {
+                box-shadow: 0 0 16px #ffd700, 0 0 32px rgba(255, 215, 0, 0.6);
+            }
+        }
 
-  .champion-name {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    color: #e31837;
-    text-align: center;
-    min-height: 20px;
-  }
+        /* Trophy */
+        .trophy-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 70px;
+            padding: 0 4px;
+        }
 
-  /* Connector lines */
-  .connector {
-    position: relative;
-  }
+        .trophy {
+            font-size: 2.5rem;
+            margin-bottom: 4px;
+        }
 
-  /* Reset button */
-  .controls {
-    text-align: center;
-    padding: 16px;
-  }
+        .champion-name {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #e31837;
+            text-align: center;
+            min-height: 20px;
+        }
 
-  .btn-reset {
-    background: #1a1a4e;
-    color: #fff;
-    border: none;
-    padding: 10px 28px;
-    border-radius: 8px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: background 0.2s;
-    text-transform: uppercase;
-  }
+        /* Connector lines */
+        .connector {
+            position: relative;
+        }
 
-  .btn-reset:hover { background: #e31837; }
+        /* Reset button */
+        .controls {
+            text-align: center;
+            padding: 16px;
+        }
 
-  /* Winner overlay */
-  .winner-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
+        .btn-reset {
+            background: #1a1a4e;
+            color: #fff;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 8px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-transform: uppercase;
+        }
 
-  .winner-overlay.show {
-    display: flex;
-    animation: fadeIn 0.5s ease;
-  }
+        .btn-reset:hover {
+            background: #e31837;
+        }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+        /* Winner overlay */
+        .winner-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
 
-  .winner-card {
-    background: linear-gradient(135deg, #1a1a4e, #2a2a6e);
-    border: 4px solid #ffd700;
-    border-radius: 16px;
-    padding: 32px 40px;
-    text-align: center;
-    max-width: 360px;
-    margin: 0 20px;
-    animation: popIn 0.5s ease;
-  }
+        .winner-overlay.show {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
 
-  @keyframes popIn {
-    from { transform: scale(0.5); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
 
-  .winner-card .trophy-big { font-size: 4rem; }
-  .winner-card h2 {
-    font-family: 'Oswald', sans-serif;
-    color: #ffd700;
-    font-size: 1.5rem;
-    margin: 8px 0 4px;
-    letter-spacing: 2px;
-  }
-  .winner-card .winner-name {
-    font-family: 'Oswald', sans-serif;
-    color: #fff;
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 8px 0 16px;
-  }
-  .winner-card .btn-close {
-    background: #e31837;
-    color: #fff;
-    border: none;
-    padding: 10px 24px;
-    border-radius: 8px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    letter-spacing: 1px;
-  }
-  .winner-card .btn-close:hover { background: #c41230; }
+            to {
+                opacity: 1;
+            }
+        }
 
-  /* Confetti */
-  .confetti-piece {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    top: -10px;
-    z-index: 101;
-    animation: confettiFall linear forwards;
-    pointer-events: none;
-  }
+        .winner-card {
+            background: linear-gradient(135deg, #1a1a4e, #2a2a6e);
+            border: 4px solid #ffd700;
+            border-radius: 16px;
+            padding: 32px 40px;
+            text-align: center;
+            max-width: 360px;
+            margin: 0 20px;
+            animation: popIn 0.5s ease;
+        }
 
-  @keyframes confettiFall {
-    to { top: 110vh; transform: rotate(720deg); }
-  }
+        @keyframes popIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
 
-  /* Mobile */
-  @media (max-width: 768px) {
-    .bracket-wrapper { padding: 4px; }
-    .bracket { min-width: 750px; }
-    .team { padding: 6px 6px; font-size: 0.68rem; min-height: 30px; }
-    .trophy { font-size: 2rem; }
-    .logo { font-size: 1.2rem; }
-    .year-title { font-size: 1rem; }
-    .round-label { font-size: 0.6rem; }
-    .region-name { font-size: 0.7rem; }
-  }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
 
-  /* Scroll hint */
-  .scroll-hint {
-    display: none;
-    text-align: center;
-    font-size: 0.75rem;
-    color: #888;
-    padding: 4px;
-    font-style: italic;
-  }
+        .winner-card .trophy-big {
+            font-size: 4rem;
+        }
 
-  @media (max-width: 920px) {
-    .scroll-hint { display: block; }
-  }
+        .winner-card h2 {
+            font-family: 'Oswald', sans-serif;
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin: 8px 0 4px;
+            letter-spacing: 2px;
+        }
 
-  footer {
-    text-align: center;
-    padding: 10px;
-    color: #999;
-    font-size: 0.7rem;
-  }
-</style>
+        .winner-card .winner-name {
+            font-family: 'Oswald', sans-serif;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 8px 0 16px;
+        }
+
+        .winner-card .btn-close {
+            background: #e31837;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        .winner-card .btn-close:hover {
+            background: #c41230;
+        }
+
+        /* Confetti */
+        .confetti-piece {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            z-index: 101;
+            animation: confettiFall linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes confettiFall {
+            to {
+                top: 110vh;
+                transform: rotate(720deg);
+            }
+        }
+
+        /* Mobile — vertical card layout */
+        .mobile-bracket {
+            display: none;
+            padding: 0 12px 12px;
+        }
+
+        .mobile-round {
+            margin-bottom: 16px;
+        }
+
+        .mobile-round-header {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            padding: 8px 0 6px;
+        }
+
+        .mobile-round-header.dark {
+            color: #1a1a4e;
+        }
+
+        .mobile-region-label {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-align: center;
+            margin: 4px 0 2px;
+        }
+
+        .mobile-region-label.dark {
+            color: #666;
+        }
+
+        .mobile-matchup {
+            display: flex;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 10px;
+            margin: 6px 0;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-matchup.later-round {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        .mobile-team {
+            flex: 1;
+            padding: 14px 8px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            color: #fff;
+            position: relative;
+        }
+
+        .mobile-team.later-round {
+            color: #222;
+        }
+
+        .mobile-team.empty {
+            color: rgba(255, 255, 255, 0.3);
+            cursor: default;
+            font-style: italic;
+        }
+
+        .mobile-team.empty.later-round {
+            color: #bbb;
+        }
+
+        .mobile-team.selected {
+            background: #e31837;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .mobile-team.eliminated {
+            opacity: 0.35;
+            text-decoration: line-through;
+            cursor: default;
+        }
+
+        .mobile-team.locked {
+            cursor: default;
+        }
+
+        .mobile-vs {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.4);
+            flex-shrink: 0;
+        }
+
+        .mobile-vs.later-round {
+            color: #aaa;
+        }
+
+        .mobile-trophy {
+            text-align: center;
+            padding: 16px 0;
+        }
+
+        .mobile-trophy .trophy {
+            font-size: 3rem;
+            margin-bottom: 4px;
+        }
+
+        .mobile-champion {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #e31837;
+            text-align: center;
+            min-height: 24px;
+        }
+
+        .mobile-champion.winner-glow {
+            animation: glow 1.5s ease-in-out infinite alternate;
+            background: linear-gradient(135deg, #ffd700, #ffec80);
+            border-radius: 8px;
+            padding: 8px 16px;
+            display: inline-block;
+            color: #333;
+        }
+
+        .btn-view-toggle {
+            display: none;
+            background: transparent;
+            color: #1a1a4e;
+            border: 2px solid #1a1a4e;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            margin-left: 8px;
+        }
+
+        .btn-view-toggle:hover {
+            background: #1a1a4e;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .bracket-wrapper {
+                display: none;
+            }
+
+            .mobile-bracket {
+                display: block;
+            }
+
+            .scroll-hint {
+                display: none !important;
+            }
+
+            .btn-view-toggle {
+                display: inline-block;
+            }
+
+            body.full-bracket-mode .bracket-wrapper {
+                display: block;
+            }
+
+            body.full-bracket-mode .mobile-bracket {
+                display: none;
+            }
+
+            body.full-bracket-mode .scroll-hint {
+                display: block !important;
+            }
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            display: none;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #888;
+            padding: 4px;
+            font-style: italic;
+        }
+
+        @media (max-width: 920px) {
+            .scroll-hint {
+                display: block;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            color: #999;
+            font-size: 0.7rem;
+        }
+    </style>
 </head>
+
 <body>
 
-<header>
-  <div class="logo">KIRKLAND<span class="sig">Signature</span></div>
-  <div class="year-title">2026 BRACKET</div>
-</header>
+    <header>
+        <div class="logo">KIRKLAND<span class="sig">Signature</span></div>
+        <div class="year-title">2026 BRACKET</div>
+    </header>
 
-<p class="scroll-hint">&#x2194; Swipe to view full bracket</p>
+    <p class="scroll-hint">&#x2194; Swipe to view full bracket</p>
 
-<div class="bracket-wrapper">
-  <div class="bracket" id="bracket"></div>
-</div>
+    <div class="bracket-wrapper">
+        <div class="bracket" id="bracket"></div>
+    </div>
 
-<div class="controls">
-  <button class="btn-reset" onclick="resetBracket()">Reset Bracket</button>
-</div>
+    <div class="mobile-bracket" id="mobileBracket"></div>
 
-<div class="winner-overlay" id="winnerOverlay">
-  <div class="winner-card">
-    <div class="trophy-big">🏆</div>
-    <h2>CHAMPION</h2>
-    <div class="winner-name" id="winnerName"></div>
-    <button class="btn-close" onclick="closeOverlay()">CLOSE</button>
-  </div>
-</div>
+    <div class="controls">
+        <button class="btn-reset" onclick="resetBracket()">Reset Bracket</button>
+        <button class="btn-view-toggle" id="viewToggle" onclick="toggleView()">Full Bracket View</button>
+    </div>
 
-<footer>For fun only. Not affiliated with Costco Wholesale.</footer>
+    <div class="winner-overlay" id="winnerOverlay">
+        <div class="winner-card">
+            <div class="trophy-big">🏆</div>
+            <h2>CHAMPION</h2>
+            <div class="winner-name" id="winnerName"></div>
+            <button class="btn-close" onclick="closeOverlay()">CLOSE</button>
+        </div>
+    </div>
 
-<script>
-// Bracket data — 16 items in seeded order
-// Left side: Food Court (top 4) + Service Deli (bottom 4)
-// Right side: Bakery (top 4) + Snacks (bottom 4)
-const INITIAL_TEAMS = [
-  // Left half (indices 0-7)
-  'Pizza',              // 0
-  'Chicken Bake',       // 1
-  'Sundae',             // 2
-  'Hot Dog',            // 3
-  'Rotisserie Chicken', // 4
-  'Mac & Cheese',       // 5
-  'Pot Pie',            // 6
-  'Chicken Street Tacos', // 7
-  // Right half (indices 8-15)
-  'Muffins',            // 8
-  'Croissants',         // 9
-  'Cakes',              // 10
-  'Cookies',            // 11
-  'Chocolate Covered Almonds', // 12
-  'Dried Mangos',       // 13
-  'Kettle Chips',       // 14
-  'Peanut Butter Pretzels'  // 15
-];
+    <footer>For fun only. Not affiliated with Costco Wholesale.</footer>
 
-/*
-  Bracket structure — 5 rounds for 16 teams:
-  R0: 8 matchups (16 teams)
-  R1: 4 matchups
-  R2: 2 matchups (semis)
-  R3: 1 matchup (final — left champ vs right champ)
+    <script>
+        // Bracket data — 16 items in seeded order
+        // Left side: Food Court (top 4) + Service Deli (bottom 4)
+        // Right side: Bakery (top 4) + Snacks (bottom 4)
+        const INITIAL_TEAMS = [
+            // Left half (indices 0-7)
+            'Pizza',              // 0
+            'Chicken Bake',       // 1
+            'Sundae',             // 2
+            'Hot Dog',            // 3
+            'Rotisserie Chicken', // 4
+            'Mac & Cheese',       // 5
+            'Pot Pie',            // 6
+            'Chicken Street Tacos', // 7
+            // Right half (indices 8-15)
+            'Muffins',            // 8
+            'Croissants',         // 9
+            'Cakes',              // 10
+            'Cookies',            // 11
+            'Chocolate Covered Almonds', // 12
+            'Dried Mangos',       // 13
+            'Kettle Chips',       // 14
+            'Peanut Butter Pretzels'  // 15
+        ];
 
-  We display:
-  Left side: R0(4 matchups) → R1(2) → R2(1) → [trophy] ← R2(1) ← R1(2) ← R0(4 matchups) : Right side
+        /*
+          Bracket structure — 5 rounds for 16 teams:
+          R0: 8 matchups (16 teams)
+          R1: 4 matchups
+          R2: 2 matchups (semis)
+          R3: 1 matchup (final — left champ vs right champ)
+        
+          We display:
+          Left side: R0(4 matchups) → R1(2) → R2(1) → [trophy] ← R2(1) ← R1(2) ← R0(4 matchups) : Right side
+        
+          Slot indices for each round:
+          R0: slots 0..15 (8 matchups of 2)
+          R1: slots 16..23 (4 matchups of 2)
+          R2: slots 24..27 (2 matchups of 2)
+          R3: slots 28..29 (1 matchup of 2)  — the final
+          Champion: slot 30
+        */
 
-  Slot indices for each round:
-  R0: slots 0..15 (8 matchups of 2)
-  R1: slots 16..23 (4 matchups of 2)
-  R2: slots 24..27 (2 matchups of 2)
-  R3: slots 28..29 (1 matchup of 2)  — the final
-  Champion: slot 30
-*/
+        const TOTAL_SLOTS = 31;
+        let slots = new Array(TOTAL_SLOTS).fill(null);
 
-const TOTAL_SLOTS = 31;
-let slots = new Array(TOTAL_SLOTS).fill(null);
+        function initSlots() {
+            slots = new Array(TOTAL_SLOTS).fill(null);
+            for (let i = 0; i < 16; i++) {
+                slots[i] = INITIAL_TEAMS[i];
+            }
+        }
 
-function initSlots() {
-  slots = new Array(TOTAL_SLOTS).fill(null);
-  for (let i = 0; i < 16; i++) {
-    slots[i] = INITIAL_TEAMS[i];
-  }
-}
+        // Given a slot index in a round, which matchup's child slot does it feed?
+        function parentSlot(slotIndex) {
+            if (slotIndex < 16) {
+                // R0 → R1: slot i feeds R1 slot (16 + floor(i/2))
+                return 16 + Math.floor(slotIndex / 2);
+            } else if (slotIndex < 24) {
+                // R1 → R2: slot i feeds R2 slot (24 + floor((i-16)/2))
+                return 24 + Math.floor((slotIndex - 16) / 2);
+            } else if (slotIndex < 28) {
+                // R2 → R3: slot i feeds R3 slot (28 + floor((i-24)/2))
+                return 28 + Math.floor((slotIndex - 24) / 2);
+            } else if (slotIndex < 30) {
+                // R3 → champion slot 30
+                return 30;
+            }
+            return -1;
+        }
 
-// Given a slot index in a round, which matchup's child slot does it feed?
-function parentSlot(slotIndex) {
-  if (slotIndex < 16) {
-    // R0 → R1: slot i feeds R1 slot (16 + floor(i/2))
-    return 16 + Math.floor(slotIndex / 2);
-  } else if (slotIndex < 24) {
-    // R1 → R2: slot i feeds R2 slot (24 + floor((i-16)/2))
-    return 24 + Math.floor((slotIndex - 16) / 2);
-  } else if (slotIndex < 28) {
-    // R2 → R3: slot i feeds R3 slot (28 + floor((i-24)/2))
-    return 28 + Math.floor((slotIndex - 24) / 2);
-  } else if (slotIndex < 30) {
-    // R3 → champion slot 30
-    return 30;
-  }
-  return -1;
-}
+        // Get the opponent slot (the other slot in the same matchup)
+        function opponentSlot(slotIndex) {
+            if (slotIndex % 2 === 0) return slotIndex + 1;
+            return slotIndex - 1;
+        }
 
-// Get the opponent slot (the other slot in the same matchup)
-function opponentSlot(slotIndex) {
-  if (slotIndex % 2 === 0) return slotIndex + 1;
-  return slotIndex - 1;
-}
+        // Check if a slot is clickable (has a value, opponent has a value, and parent not yet decided OR clicking would be consistent)
+        function canSelect(slotIndex) {
+            if (slots[slotIndex] === null) return false;
+            const opp = opponentSlot(slotIndex);
+            if (slots[opp] === null) return false;
+            const parent = parentSlot(slotIndex);
+            if (parent === -1) return false;
+            // Allow re-selection if parent hasn't cascaded further, or allow changing
+            return true;
+        }
 
-// Check if a slot is clickable (has a value, opponent has a value, and parent not yet decided OR clicking would be consistent)
-function canSelect(slotIndex) {
-  if (slots[slotIndex] === null) return false;
-  const opp = opponentSlot(slotIndex);
-  if (slots[opp] === null) return false;
-  const parent = parentSlot(slotIndex);
-  if (parent === -1) return false;
-  // Allow re-selection if parent hasn't cascaded further, or allow changing
-  return true;
-}
+        function selectTeam(slotIndex) {
+            if (!canSelect(slotIndex)) return;
 
-function selectTeam(slotIndex) {
-  if (!canSelect(slotIndex)) return;
+            const parent = parentSlot(slotIndex);
+            if (parent === -1) return;
 
-  const parent = parentSlot(slotIndex);
-  if (parent === -1) return;
+            const selectedTeam = slots[slotIndex];
+            const previousWinner = slots[parent];
 
-  const selectedTeam = slots[slotIndex];
-  const previousWinner = slots[parent];
+            // Set the winner in the parent slot
+            slots[parent] = selectedTeam;
 
-  // Set the winner in the parent slot
-  slots[parent] = selectedTeam;
+            // If the winner changed, we need to clear downstream picks that depended on the old winner
+            if (previousWinner !== null && previousWinner !== selectedTeam) {
+                clearDownstream(parent);
+            }
 
-  // If the winner changed, we need to clear downstream picks that depended on the old winner
-  if (previousWinner !== null && previousWinner !== selectedTeam) {
-    clearDownstream(parent);
-  }
+            // Champion decided
+            if (parent === 30) {
+                setTimeout(() => showWinner(selectedTeam), 300);
+            }
 
-  // Champion decided
-  if (parent === 30) {
-    setTimeout(() => showWinner(selectedTeam), 300);
-  }
+            render();
+        }
 
-  render();
-}
+        function clearDownstream(slotIndex) {
+            const parent = parentSlot(slotIndex);
+            if (parent === -1) return;
 
-function clearDownstream(slotIndex) {
-  const parent = parentSlot(slotIndex);
-  if (parent === -1) return;
+            const currentInParent = slots[parent];
+            if (currentInParent === null) return;
 
-  const currentInParent = slots[parent];
-  if (currentInParent === null) return;
+            // Check if parent's value came from this slot's subtree — if so, clear it
+            // We clear if the parent holds a value that is no longer reachable from this slot
+            // Simple approach: if the parent value equals something that could only come from this branch, clear it
+            const opp = opponentSlot(slotIndex);
+            // If the parent's value matches neither this slot nor opponent, it's stale
+            // Actually: just check if parent's value matches this slot or opponent
+            // If parent's value doesn't match either feeder slot anymore, clear it
+            if (slots[parent] !== slots[slotIndex] && slots[parent] !== slots[opp]) {
+                slots[parent] = null;
+                clearDownstream(parent);
+            } else if (slots[parent] === slots[slotIndex] || slots[parent] === slots[opp]) {
+                // Parent is still valid, but keep checking further
+                // If parent still holds our value, it's fine
+            }
+        }
 
-  // Check if parent's value came from this slot's subtree — if so, clear it
-  // We clear if the parent holds a value that is no longer reachable from this slot
-  // Simple approach: if the parent value equals something that could only come from this branch, clear it
-  const opp = opponentSlot(slotIndex);
-  // If the parent's value matches neither this slot nor opponent, it's stale
-  // Actually: just check if parent's value matches this slot or opponent
-  // If parent's value doesn't match either feeder slot anymore, clear it
-  if (slots[parent] !== slots[slotIndex] && slots[parent] !== slots[opp]) {
-    slots[parent] = null;
-    clearDownstream(parent);
-  } else if (slots[parent] === slots[slotIndex] || slots[parent] === slots[opp]) {
-    // Parent is still valid, but keep checking further
-    // If parent still holds our value, it's fine
-  }
-}
+        // Render the desktop bracket
+        function renderDesktop() {
+            const bracket = document.getElementById('bracket');
+            bracket.innerHTML = '';
 
-// Render the bracket
-function render() {
-  const bracket = document.getElementById('bracket');
-  bracket.innerHTML = '';
+            // Layout: 9 visual columns
+            // Col 0: R0 left (matchups 0-3) — Food Court + Service Deli first round
+            // Col 1: R1 left (matchups 0-1)
+            // Col 2: R2 left (matchup 0) — left semi
+            // Col 3: R3 left side (slot 28) — finalist left
+            // Col 4: Trophy + champion
+            // Col 5: R3 right side (slot 29) — finalist right
+            // Col 6: R2 right (matchup 1) — right semi
+            // Col 7: R1 right (matchups 2-3)
+            // Col 8: R0 right (matchups 4-7) — Bakery + Snacks first round
 
-  // Layout: 9 visual columns
-  // Col 0: R0 left (matchups 0-3) — Food Court + Service Deli first round
-  // Col 1: R1 left (matchups 0-1)
-  // Col 2: R2 left (matchup 0) — left semi
-  // Col 3: R3 left side (slot 28) — finalist left
-  // Col 4: Trophy + champion
-  // Col 5: R3 right side (slot 29) — finalist right
-  // Col 6: R2 right (matchup 1) — right semi
-  // Col 7: R1 right (matchups 2-3)
-  // Col 8: R0 right (matchups 4-7) — Bakery + Snacks first round
+            // Column definitions with slot mappings
+            const columns = [
+                { label: 'Round 1', slots: [0, 1, 2, 3, 4, 5, 6, 7], side: 'left', regions: ['Food Court', 'Service Deli'] },
+                { label: 'Round 2', slots: [16, 17, 18, 19], side: 'left' },
+                { label: 'Semifinals', slots: [24, 25], side: 'left' },
+                { label: 'Final', slots: [28], side: 'left', single: true },
+                { label: '', trophy: true },
+                { label: 'Final', slots: [29], side: 'right', single: true },
+                { label: 'Semifinals', slots: [26, 27], side: 'right' },
+                { label: 'Round 2', slots: [20, 21, 22, 23], side: 'right' },
+                { label: 'Round 1', slots: [8, 9, 10, 11, 12, 13, 14, 15], side: 'right', regions: ['Bakery', 'Snacks'] },
+            ];
 
-  // Column definitions with slot mappings
-  const columns = [
-    { label: 'Round 1', slots: [0,1, 2,3, 4,5, 6,7], side: 'left', regions: ['Food Court', 'Service Deli'] },
-    { label: 'Round 2', slots: [16,17, 18,19], side: 'left' },
-    { label: 'Semifinals', slots: [24,25], side: 'left' },
-    { label: 'Final', slots: [28], side: 'left', single: true },
-    { label: '', trophy: true },
-    { label: 'Final', slots: [29], side: 'right', single: true },
-    { label: 'Semifinals', slots: [26,27], side: 'right' },
-    { label: 'Round 2', slots: [20,21, 22,23], side: 'right' },
-    { label: 'Round 1', slots: [8,9, 10,11, 12,13, 14,15], side: 'right', regions: ['Bakery', 'Snacks'] },
-  ];
-
-  columns.forEach((col) => {
-    if (col.trophy) {
-      const div = document.createElement('div');
-      div.className = 'trophy-col';
-      div.innerHTML = `
+            columns.forEach((col) => {
+                if (col.trophy) {
+                    const div = document.createElement('div');
+                    div.className = 'trophy-col';
+                    div.innerHTML = `
         <div class="trophy">🏆</div>
         <div class="champion-name ${slots[30] ? 'winner-glow' : ''}" style="padding:6px 8px;border-radius:6px;">
           ${slots[30] || ''}
         </div>
       `;
-      bracket.appendChild(div);
-      return;
-    }
+                    bracket.appendChild(div);
+                    return;
+                }
 
-    const roundDiv = document.createElement('div');
-    roundDiv.className = 'round';
+                const roundDiv = document.createElement('div');
+                roundDiv.className = 'round';
 
-    if (col.label) {
-      const lbl = document.createElement('div');
-      lbl.className = 'round-label';
-      lbl.textContent = col.label;
-      roundDiv.appendChild(lbl);
-    }
+                if (col.label) {
+                    const lbl = document.createElement('div');
+                    lbl.className = 'round-label';
+                    lbl.textContent = col.label;
+                    roundDiv.appendChild(lbl);
+                }
 
-    if (col.single) {
-      // Single finalist slot
-      const slotIdx = col.slots[0];
-      const matchDiv = document.createElement('div');
-      matchDiv.className = 'matchup';
-      matchDiv.style.flex = '1';
-      matchDiv.style.justifyContent = 'center';
-      matchDiv.style.display = 'flex';
-      matchDiv.style.flexDirection = 'column';
+                if (col.single) {
+                    // Single finalist slot
+                    const slotIdx = col.slots[0];
+                    const matchDiv = document.createElement('div');
+                    matchDiv.className = 'matchup';
+                    matchDiv.style.flex = '1';
+                    matchDiv.style.justifyContent = 'center';
+                    matchDiv.style.display = 'flex';
+                    matchDiv.style.flexDirection = 'column';
 
-      const teamDiv = createTeamEl(slotIdx, true);
-      matchDiv.appendChild(teamDiv);
-      roundDiv.appendChild(matchDiv);
-    } else {
-      // Pair up slots into matchups
-      const matchups = [];
-      for (let i = 0; i < col.slots.length; i += 2) {
-        matchups.push([col.slots[i], col.slots[i+1]]);
-      }
+                    const teamDiv = createTeamEl(slotIdx, true);
+                    matchDiv.appendChild(teamDiv);
+                    roundDiv.appendChild(matchDiv);
+                } else {
+                    // Pair up slots into matchups
+                    const matchups = [];
+                    for (let i = 0; i < col.slots.length; i += 2) {
+                        matchups.push([col.slots[i], col.slots[i + 1]]);
+                    }
 
-      const halfIdx = Math.floor(matchups.length / 2);
+                    const halfIdx = Math.floor(matchups.length / 2);
 
-      matchups.forEach((pair, mi) => {
-        // Insert top region label above the first matchup
-        if (col.regions && mi === 0) {
-          const regionLbl = document.createElement('div');
-          regionLbl.className = 'region-name region-top';
-          regionLbl.textContent = col.regions[0];
-          roundDiv.appendChild(regionLbl);
+                    matchups.forEach((pair, mi) => {
+                        // Insert top region label above the first matchup
+                        if (col.regions && mi === 0) {
+                            const regionLbl = document.createElement('div');
+                            regionLbl.className = 'region-name region-top';
+                            regionLbl.textContent = col.regions[0];
+                            roundDiv.appendChild(regionLbl);
+                        }
+
+                        const matchDiv = document.createElement('div');
+                        matchDiv.className = 'matchup';
+                        matchDiv.style.flex = '1';
+                        matchDiv.style.justifyContent = 'center';
+                        matchDiv.style.display = 'flex';
+                        matchDiv.style.flexDirection = 'column';
+
+                        const t1 = createTeamEl(pair[0], false);
+                        const t2 = createTeamEl(pair[1], false);
+
+                        const spacerTop = document.createElement('div');
+                        spacerTop.style.flex = '1';
+                        const spacerMid = document.createElement('div');
+                        spacerMid.style.height = '2px';
+                        const spacerBot = document.createElement('div');
+                        spacerBot.style.flex = '1';
+
+                        matchDiv.appendChild(spacerTop);
+                        matchDiv.appendChild(t1);
+                        matchDiv.appendChild(spacerMid);
+                        matchDiv.appendChild(t2);
+                        matchDiv.appendChild(spacerBot);
+
+                        roundDiv.appendChild(matchDiv);
+
+                        // Insert bottom region label after the last matchup
+                        if (col.regions && mi === matchups.length - 1) {
+                            const regionLbl = document.createElement('div');
+                            regionLbl.className = 'region-name region-bottom';
+                            regionLbl.textContent = col.regions[1];
+                            roundDiv.appendChild(regionLbl);
+                        }
+                    });
+                }
+
+                bracket.appendChild(roundDiv);
+            });
         }
 
-        const matchDiv = document.createElement('div');
-        matchDiv.className = 'matchup';
-        matchDiv.style.flex = '1';
-        matchDiv.style.justifyContent = 'center';
-        matchDiv.style.display = 'flex';
-        matchDiv.style.flexDirection = 'column';
+        function createTeamEl(slotIndex, isSingleSlot) {
+            const div = document.createElement('div');
+            const val = slots[slotIndex];
 
-        const t1 = createTeamEl(pair[0], false);
-        const t2 = createTeamEl(pair[1], false);
+            if (val === null) {
+                div.className = 'team empty';
+                div.textContent = '—';
+                return div;
+            }
 
-        const spacerTop = document.createElement('div');
-        spacerTop.style.flex = '1';
-        const spacerMid = document.createElement('div');
-        spacerMid.style.height = '2px';
-        const spacerBot = document.createElement('div');
-        spacerBot.style.flex = '1';
+            div.className = 'team';
+            div.textContent = val;
 
-        matchDiv.appendChild(spacerTop);
-        matchDiv.appendChild(t1);
-        matchDiv.appendChild(spacerMid);
-        matchDiv.appendChild(t2);
-        matchDiv.appendChild(spacerBot);
+            const parent = parentSlot(slotIndex);
+            const opp = opponentSlot(slotIndex);
 
-        roundDiv.appendChild(matchDiv);
+            // If this team was selected as winner
+            if (parent !== -1 && slots[parent] === val) {
+                div.classList.add('selected');
+            }
 
-        // Insert bottom region label after the last matchup
-        if (col.regions && mi === matchups.length - 1) {
-          const regionLbl = document.createElement('div');
-          regionLbl.className = 'region-name region-bottom';
-          regionLbl.textContent = col.regions[1];
-          roundDiv.appendChild(regionLbl);
+            // If its opponent was selected (this one is eliminated)
+            if (parent !== -1 && slots[parent] !== null && slots[parent] !== val) {
+                div.classList.add('eliminated');
+            }
+
+            // If opponent doesn't exist yet, can't select
+            if (slots[opp] === null) {
+                div.classList.add('locked');
+            }
+
+            div.addEventListener('click', () => selectTeam(slotIndex));
+
+            return div;
         }
-      });
-    }
 
-    bracket.appendChild(roundDiv);
-  });
-}
+        function showWinner(name) {
+            document.getElementById('winnerName').textContent = name;
+            document.getElementById('winnerOverlay').classList.add('show');
+            launchConfetti();
+        }
 
-function createTeamEl(slotIndex, isSingleSlot) {
-  const div = document.createElement('div');
-  const val = slots[slotIndex];
+        function closeOverlay() {
+            document.getElementById('winnerOverlay').classList.remove('show');
+        }
 
-  if (val === null) {
-    div.className = 'team empty';
-    div.textContent = '—';
-    return div;
-  }
+        function launchConfetti() {
+            const colors = ['#e31837', '#ffd700', '#1a1a4e', '#fff', '#4CAF50', '#FF9800'];
+            for (let i = 0; i < 80; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + 'vw';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.width = (Math.random() * 8 + 5) + 'px';
+                piece.style.height = (Math.random() * 8 + 5) + 'px';
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                piece.style.animationDelay = (Math.random() * 1.5) + 's';
+                document.body.appendChild(piece);
+                setTimeout(() => piece.remove(), 5000);
+            }
+        }
 
-  div.className = 'team';
-  div.textContent = val;
+        function resetBracket() {
+            initSlots();
+            closeOverlay();
+            render();
+        }
 
-  const parent = parentSlot(slotIndex);
-  const opp = opponentSlot(slotIndex);
+        function toggleView() {
+            const body = document.body;
+            const btn = document.getElementById('viewToggle');
+            body.classList.toggle('full-bracket-mode');
+            if (body.classList.contains('full-bracket-mode')) {
+                btn.textContent = 'Card View';
+            } else {
+                btn.textContent = 'Full Bracket View';
+            }
+        }
 
-  // If this team was selected as winner
-  if (parent !== -1 && slots[parent] === val) {
-    div.classList.add('selected');
-  }
+        // Mobile render
+        function renderMobile() {
+            const mb = document.getElementById('mobileBracket');
+            mb.innerHTML = '';
 
-  // If its opponent was selected (this one is eliminated)
-  if (parent !== -1 && slots[parent] !== null && slots[parent] !== val) {
-    div.classList.add('eliminated');
-  }
+            const rounds = [
+                {
+                    label: 'Round 1', matchups: [
+                        { a: 0, b: 1, region: 'Food Court' },
+                        { a: 2, b: 3 },
+                        { a: 4, b: 5, region: 'Service Deli' },
+                        { a: 6, b: 7 },
+                        { a: 8, b: 9, region: 'Bakery' },
+                        { a: 10, b: 11 },
+                        { a: 12, b: 13, region: 'Snacks' },
+                        { a: 14, b: 15 },
+                    ], dark: false
+                },
+                {
+                    label: 'Round 2', matchups: [
+                        { a: 16, b: 17, region: 'Food Court' },
+                        { a: 18, b: 19, region: 'Service Deli' },
+                        { a: 20, b: 21, region: 'Bakery' },
+                        { a: 22, b: 23, region: 'Snacks' },
+                    ], dark: true
+                },
+                {
+                    label: 'Semifinals', matchups: [
+                        { a: 24, b: 25, region: 'Left' },
+                        { a: 26, b: 27, region: 'Right' },
+                    ], dark: true
+                },
+                {
+                    label: 'Final', matchups: [
+                        { a: 28, b: 29 },
+                    ], dark: true
+                },
+            ];
 
-  // If opponent doesn't exist yet, can't select
-  if (slots[opp] === null) {
-    div.classList.add('locked');
-  }
+            rounds.forEach(round => {
+                const section = document.createElement('div');
+                section.className = 'mobile-round';
 
-  div.addEventListener('click', () => selectTeam(slotIndex));
+                const header = document.createElement('div');
+                header.className = 'mobile-round-header' + (round.dark ? ' dark' : '');
+                header.textContent = round.label;
+                section.appendChild(header);
 
-  return div;
-}
+                round.matchups.forEach(m => {
+                    if (m.region) {
+                        const rl = document.createElement('div');
+                        rl.className = 'mobile-region-label' + (round.dark ? ' dark' : '');
+                        rl.textContent = m.region;
+                        section.appendChild(rl);
+                    }
 
-function showWinner(name) {
-  document.getElementById('winnerName').textContent = name;
-  document.getElementById('winnerOverlay').classList.add('show');
-  launchConfetti();
-}
+                    const row = document.createElement('div');
+                    row.className = 'mobile-matchup' + (round.dark ? ' later-round' : '');
 
-function closeOverlay() {
-  document.getElementById('winnerOverlay').classList.remove('show');
-}
+                    const laterClass = round.dark ? ' later-round' : '';
 
-function launchConfetti() {
-  const colors = ['#e31837', '#ffd700', '#1a1a4e', '#fff', '#4CAF50', '#FF9800'];
-  for (let i = 0; i < 80; i++) {
-    const piece = document.createElement('div');
-    piece.className = 'confetti-piece';
-    piece.style.left = Math.random() * 100 + 'vw';
-    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-    piece.style.width = (Math.random() * 8 + 5) + 'px';
-    piece.style.height = (Math.random() * 8 + 5) + 'px';
-    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-    piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
-    piece.style.animationDelay = (Math.random() * 1.5) + 's';
-    document.body.appendChild(piece);
-    setTimeout(() => piece.remove(), 5000);
-  }
-}
+                    // Team A
+                    const tA = document.createElement('div');
+                    tA.className = 'mobile-team' + laterClass;
+                    const valA = slots[m.a];
+                    if (valA === null) {
+                        tA.textContent = '—';
+                        tA.classList.add('empty');
+                    } else {
+                        tA.textContent = valA;
+                        const pA = parentSlot(m.a);
+                        if (pA !== -1 && slots[pA] === valA) tA.classList.add('selected');
+                        if (pA !== -1 && slots[pA] !== null && slots[pA] !== valA) tA.classList.add('eliminated');
+                        if (slots[m.b] === null) tA.classList.add('locked');
+                        else tA.addEventListener('click', () => selectTeam(m.a));
+                    }
 
-function resetBracket() {
-  initSlots();
-  closeOverlay();
-  render();
-}
+                    // VS divider
+                    const vs = document.createElement('div');
+                    vs.className = 'mobile-vs' + laterClass;
+                    vs.textContent = 'VS';
 
-// Initialize
-initSlots();
-render();
-</script>
+                    // Team B
+                    const tB = document.createElement('div');
+                    tB.className = 'mobile-team' + laterClass;
+                    const valB = slots[m.b];
+                    if (valB === null) {
+                        tB.textContent = '—';
+                        tB.classList.add('empty');
+                    } else {
+                        tB.textContent = valB;
+                        const pB = parentSlot(m.b);
+                        if (pB !== -1 && slots[pB] === valB) tB.classList.add('selected');
+                        if (pB !== -1 && slots[pB] !== null && slots[pB] !== valB) tB.classList.add('eliminated');
+                        if (slots[m.a] === null) tB.classList.add('locked');
+                        else tB.addEventListener('click', () => selectTeam(m.b));
+                    }
+
+                    row.appendChild(tA);
+                    row.appendChild(vs);
+                    row.appendChild(tB);
+                    section.appendChild(row);
+                });
+
+                mb.appendChild(section);
+            });
+
+            // Champion display
+            const trophy = document.createElement('div');
+            trophy.className = 'mobile-trophy';
+            trophy.innerHTML = '<div class="trophy">🏆</div>';
+            const champ = document.createElement('div');
+            champ.className = 'mobile-champion' + (slots[30] ? ' winner-glow' : '');
+            champ.textContent = slots[30] || '';
+            trophy.appendChild(champ);
+            mb.appendChild(trophy);
+        }
+
+        function render() {
+            renderDesktop();
+            renderMobile();
+        }
+
+        // Initialize
+        initSlots();
+        render();
+    </script>
 </body>
+
 </html>
