@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kirkland Signature 2026 Bracket</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ── RESET & BASE ─────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: linear-gradient(160deg, #0b1936 0%, #182f61 45%, #0e2250 70%, #0b1936 100%);
+  min-height: 100vh;
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+  color: #fff;
+  overflow-x: auto;
+}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  padding: 18px 20px 12px;
+}
+.logo-lockup {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: #c8102e;
+  border-radius: 5px;
+  padding: 6px 30px 8px;
+  margin-bottom: 7px;
+  box-shadow: 0 4px 20px rgba(200,16,46,.45);
+}
+.logo-kirkland {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: .1em;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,.35);
+}
+.logo-sig {
+  font-size: .72rem;
+  letter-spacing: .38em;
+  color: rgba(255,255,255,.88);
+  margin-top: -1px;
+}
+.bracket-year {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 2rem;
+  letter-spacing: .22em;
+  color: #f5d020;
+  text-shadow: 0 2px 12px rgba(245,208,32,.4);
+}
+
+/* ── SCROLL WRAPPER ────────────────────────────────────── */
+.scroll-wrapper {
+  overflow-x: auto;
+  padding: 0 12px 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── OUTER BRACKET SHELL ───────────────────────────────── */
+.bracket-shell {
+  min-width: 980px;
+  position: relative;
+  /* extra top/bottom padding for region labels */
+  padding: 38px 6px 32px;
+}
+
+/* ── REGION LABELS ─────────────────────────────────────── */
+.rlabel {
+  position: absolute;
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: .08em;
+  pointer-events: none;
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba(0,0,0,.6);
+}
+.rl-fc  { top: 2px;    left: 6px;   color: #fff; }
+.rl-sd  { bottom: 2px; left: 6px;   color: #fff; }
+.rl-bk  { top: 2px;    right: 6px;  color: #fff; }
+.rl-sn  { bottom: 2px; right: 6px;  color: #fff; }
+
+/* ── BRACKET ROW ───────────────────────────────────────── */
+/*
+  Full bracket (left→right):
+  [R1-L] [C1-L] [QF-L] [C2-L] [SF-L] [SF-CONN-L] [CENTER] [SF-CONN-R] [SF-R] [C2-R] [QF-R] [C1-R] [R1-R]
+
+  Bracket height: 520px.
+  R1 has 4 matchups with justify-content:space-around → centers at y=65,195,325,455
+  QF has 2 matchups with justify-content:space-around → centers at y=130,390
+  SF has 1 matchup  with justify-content:center       → center  at y=260
+*/
+.bracket-row {
+  display: flex;
+  align-items: stretch;
+  height: 520px;
+}
+
+/* ── ROUND COLUMNS ─────────────────────────────────────── */
+.round {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 520px;
+  flex-shrink: 0;
+}
+.r1 { width: 120px; }
+.r2 { width: 120px; }
+.r3 { width: 120px; justify-content: center; }
+
+/* ── MATCHUP ───────────────────────────────────────────── */
+.matchup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;   /* needed for approach-line pseudo-elements */
+}
+
+/* ── TEAM BUTTONS ──────────────────────────────────────── */
+.btn {
+  height: 36px;
+  background: rgba(255,255,255,.96);
+  color: #1a2744;
+  border: none;
+  border-radius: 3px;
+  padding: 0 8px;
+  font-family: 'Oswald', sans-serif;
+  font-size: .7rem;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background .18s, color .18s, transform .12s, box-shadow .18s;
+  letter-spacing: .02em;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+.btn:hover:not([disabled]) {
+  background: #ffe033;
+  transform: scale(1.04);
+  box-shadow: 0 2px 10px rgba(255,224,51,.5);
+  position: relative;
+  z-index: 2;
+}
+.btn.winner {
+  background: #c8102e;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(200,16,46,.5);
+}
+.btn.winner:hover:not([disabled]) {
+  background: #e0153a;
+}
+.btn.loser {
+  background: rgba(255,255,255,.28);
+  color: rgba(255,255,255,.4);
+  cursor: default;
+  text-decoration: line-through;
+}
+.btn.tbd {
+  background: rgba(255,255,255,.1);
+  color: rgba(255,255,255,.35);
+  font-style: italic;
+  cursor: default;
+}
+
+/* ══════════════════════════════════════════════════════════
+   CONNECTOR COLUMNS
+   ══════════════════════════════════════════════════════════
+
+   C1 (R1→QF): 4 R1 matchups → 2 QF matchups.
+     R1 centers (space-around, 4 items, 520px): 65, 195, 325, 455
+     Within each 260px half:  top item at 25%, bottom at 75%.
+     Connector draws: horiz lines at 25%/75%, vertical bar 25%→75%.
+
+   C2 (QF→SF): 2 QF matchups → 1 SF matchup.
+     QF centers (space-around, 2 items, 520px): 130, 390
+     The connector is wrapped in a 3-part flex (25%/50%/25%):
+       spacer|conn-pair|spacer so conn-pair spans 130→390.
+     Within conn-pair (260px): top item at 0%, bottom at 100%.
+     Connector draws borders at edges (conn-top + conn-bot).
+══════════════════════════════════════════════════════════ */
+
+.conn-col {
+  width: 22px;
+  height: 520px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* ── C1: R1→QF connectors ──────────────────────────────── */
+/* Two equal conn-pairs, each 260px, lines at 25% & 75% */
+.c1-pair {
+  flex: 1;
+  position: relative;
+}
+
+/* Vertical bar from 25% to 75% of each c1-pair */
+.left-side  .c1-pair { background: linear-gradient(rgba(255,255,255,.62),rgba(255,255,255,.62)) calc(100% - 1px) 25% / 2px 50% no-repeat; }
+.right-side .c1-pair { background: linear-gradient(rgba(255,255,255,.62),rgba(255,255,255,.62)) 1px 25% / 2px 50% no-repeat; }
+
+/* Horizontal line at top item center (25%) */
+.left-side  .c1-pair::before { content:''; position:absolute; top:25%; left:0; right:0; height:2px; background:rgba(255,255,255,.62); transform:translateY(-50%); }
+.right-side .c1-pair::before { content:''; position:absolute; top:25%; left:0; right:0; height:2px; background:rgba(255,255,255,.62); transform:translateY(-50%); }
+
+/* Horizontal line at bottom item center (75%) */
+.left-side  .c1-pair::after  { content:''; position:absolute; top:75%; left:0; right:0; height:2px; background:rgba(255,255,255,.62); transform:translateY(-50%); }
+.right-side .c1-pair::after  { content:''; position:absolute; top:75%; left:0; right:0; height:2px; background:rgba(255,255,255,.62); transform:translateY(-50%); }
+
+/* ── C2: QF→SF connectors ──────────────────────────────── */
+/* One conn-pair centered by spacers (flex 1/2/1) */
+.c2-spacer { flex: 1; }
+.c2-pair   { flex: 2; display: flex; flex-direction: column; }
+
+.conn-top, .conn-bot { flex: 1; }
+
+/* Left side: vertical bar on RIGHT */
+.left-side  .conn-top { border-top:   2px solid rgba(255,255,255,.62); border-right: 2px solid rgba(255,255,255,.62); }
+.left-side  .conn-bot { border-bottom:2px solid rgba(255,255,255,.62); border-right: 2px solid rgba(255,255,255,.62); }
+
+/* Right side: vertical bar on LEFT */
+.right-side .conn-top { border-top:   2px solid rgba(255,255,255,.62); border-left:  2px solid rgba(255,255,255,.62); }
+.right-side .conn-bot { border-bottom:2px solid rgba(255,255,255,.62); border-left:  2px solid rgba(255,255,255,.62); }
+
+/* ── SF → FINAL connectors ─────────────────────────────── */
+.sf-conn {
+  width: 32px;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.sf-conn-line {
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,.62);
+}
+
+/* ── APPROACH LINES ON MATCHUPS ────────────────────────── */
+/*
+  Each matchup that has a connector on a side gets a short
+  horizontal approach-line drawn via ::before / ::after.
+  These sit at top:50% of the .matchup div (= the gap between
+  the two 36px buttons), which is visually the centre.
+
+  Left side: lines extend LEFT (::before) or RIGHT (::after).
+  Right side: lines extend RIGHT (::before) or LEFT (::after).
+*/
+/* QF (r2): approach toward C1 connector (outward side) */
+.left-side  .r2 .matchup::before,
+.right-side .r2 .matchup::before {
+  content:''; position:absolute; top:50%; width:22px; height:2px;
+  background:rgba(255,255,255,.62); transform:translateY(-50%); pointer-events:none;
+}
+.left-side  .r2 .matchup::before { left:-22px; }
+.right-side .r2 .matchup::before { right:-22px; }
+
+/* QF (r2): approach toward C2 connector (inward side) */
+.left-side  .r2 .matchup::after { content:''; position:absolute; top:50%; width:22px; height:2px; background:rgba(255,255,255,.62); transform:translateY(-50%); pointer-events:none; right:-22px; }
+.right-side .r2 .matchup::after { content:''; position:absolute; top:50%; width:22px; height:2px; background:rgba(255,255,255,.62); transform:translateY(-50%); pointer-events:none; left:-22px; }
+
+/* SF (r3): approach toward C2 connector */
+.left-side  .r3 .matchup::before { content:''; position:absolute; top:50%; width:22px; height:2px; background:rgba(255,255,255,.62); transform:translateY(-50%); pointer-events:none; left:-22px; }
+.right-side .r3 .matchup::before { content:''; position:absolute; top:50%; width:22px; height:2px; background:rgba(255,255,255,.62); transform:translateY(-50%); pointer-events:none; right:-22px; }
+
+/* SF (r3): approach toward sf-conn */
+.left-side  .r3 .matchup::after { content:''; position:absolute; top:50%; width:32px; height:2px; background:rgba(255,255,255,.62); transform:translateY(-50%); pointer-events:none; right:-32px; }
+.right-side .r3 .matchup::after { content:''; position:absolute; top:50%; width:32px; height:2px; background:rgba(255,255,255,.62); transform:translateY(-50%); pointer-events:none; left:-32px; }
+
+/* ── CENTER PANEL ──────────────────────────────────────── */
+.bracket-center {
+  width: 152px;
+  height: 520px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Final matchup: vertically centred so its middle = y=260 */
+/* Matchup height = 36+4+36 = 76px → top = 260-38 = 222px */
+/* Label above matchup ~22px + 4px margin → section top = 196px */
+.final-section {
+  position: absolute;
+  top: 196px;
+  left: 0; right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.final-label {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 1rem;
+  letter-spacing: .22em;
+  color: #f5d020;
+}
+.final-section .matchup {
+  width: 100%;
+}
+.final-section .btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  font-size: .68rem;
+}
+
+/* Champion box below final matchup */
+/* Final section top 196 + label~26 + matchup 76 + gap 14 = 312 */
+.champ-box {
+  position: absolute;
+  top: 318px;
+  left: 0; right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,.06);
+  border: 2px solid rgba(245,208,32,.45);
+  border-radius: 8px;
+  padding: 8px 10px 10px;
+  text-align: center;
+  transition: border-color .3s, box-shadow .3s;
+}
+.champ-box.crowned {
+  border-color: #f5d020;
+  box-shadow: 0 0 24px rgba(245,208,32,.4);
+}
+.trophy { font-size: 1.9rem; line-height: 1; }
+.champ-label {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: .78rem;
+  letter-spacing: .22em;
+  color: #f5d020;
+  margin-top: 2px;
+}
+.champ-name {
+  font-size: .78rem;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 3px;
+  min-height: 1em;
+  letter-spacing: .04em;
+}
+
+/* ── CONTROLS ──────────────────────────────────────────── */
+.controls {
+  text-align: center;
+  padding: 14px 0 22px;
+}
+.reset-btn {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,.45);
+  color: rgba(255,255,255,.75);
+  padding: 8px 30px;
+  font-family: 'Oswald', sans-serif;
+  font-size: .88rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, color .2s;
+}
+.reset-btn:hover {
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.85);
+  color: #fff;
+}
+
+/* ── CELEBRATION OVERLAY ───────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.76);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeBg .35s ease;
+}
+@keyframes fadeBg { from { opacity:0 } to { opacity:1 } }
+.overlay-card {
+  background: linear-gradient(145deg,#182f61,#0b1936);
+  border: 3px solid #f5d020;
+  border-radius: 14px;
+  padding: 38px 52px 34px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(245,208,32,.3), 0 20px 60px rgba(0,0,0,.6);
+  animation: popIn .45s cubic-bezier(.34,1.56,.64,1);
+  max-width: 90vw;
+}
+@keyframes popIn { from{transform:scale(.5);opacity:0} to{transform:scale(1);opacity:1} }
+.cel-trophy  { font-size: 4rem; line-height: 1; margin-bottom: 6px; }
+.cel-heading {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 2.3rem;
+  letter-spacing: .18em;
+  color: #f5d020;
+  margin-bottom: 4px;
+}
+.cel-sub {
+  font-size: .8rem;
+  letter-spacing: .18em;
+  color: rgba(255,255,255,.65);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.cel-winner {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 2rem;
+  letter-spacing: .1em;
+  color: #fff;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 12px rgba(200,16,46,.6);
+}
+.cel-close {
+  background: #c8102e;
+  border: none;
+  color: #fff;
+  padding: 10px 34px;
+  font-family: 'Oswald', sans-serif;
+  font-size: .94rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.cel-close:hover { background: #e0153a; }
+
+/* ── RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .logo-kirkland { font-size: 2.2rem; }
+  .bracket-year  { font-size: 1.5rem; }
+}
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ════════════════════════════════════════════ -->
+<header class="header">
+  <div class="logo-lockup">
+    <div class="logo-kirkland">KIRKLAND</div>
+    <div class="logo-sig">Signature</div>
+  </div>
+  <div class="bracket-year">2026 Bracket</div>
+</header>
+
+<!-- ══ BRACKET ═══════════════════════════════════════════ -->
+<div class="scroll-wrapper">
+<div class="bracket-shell">
+
+  <!-- Region labels -->
+  <div class="rlabel rl-fc">FOOD COURT</div>
+  <div class="rlabel rl-sd">SERVICE DELI</div>
+  <div class="rlabel rl-bk">BAKERY</div>
+  <div class="rlabel rl-sn">SNACKS</div>
+
+  <div class="bracket-row">
+
+    <!-- ════ LEFT SIDE ════════════════════════════════════ -->
+    <div class="side left-side" style="display:flex;align-items:stretch;flex:1;">
+
+      <!-- R1 LEFT -->
+      <div class="round r1">
+        <div class="matchup" id="m-r1fc1">
+          <button class="btn" data-mid="r1fc1" data-ti="0">Pizza</button>
+          <button class="btn" data-mid="r1fc1" data-ti="1">Chicken Bake</button>
+        </div>
+        <div class="matchup" id="m-r1fc2">
+          <button class="btn" data-mid="r1fc2" data-ti="0">Sundae</button>
+          <button class="btn" data-mid="r1fc2" data-ti="1">Hot Dog</button>
+        </div>
+        <div class="matchup" id="m-r1sd1">
+          <button class="btn" data-mid="r1sd1" data-ti="0">Rotisserie Chicken</button>
+          <button class="btn" data-mid="r1sd1" data-ti="1">Mac &amp; Cheese</button>
+        </div>
+        <div class="matchup" id="m-r1sd2">
+          <button class="btn" data-mid="r1sd2" data-ti="0">Pot Pie</button>
+          <button class="btn" data-mid="r1sd2" data-ti="1">Chicken Street Tacos</button>
+        </div>
+      </div>
+
+      <!-- C1-L: R1 → QF (lines at 25%/75% of each half) -->
+      <div class="conn-col">
+        <div class="c1-pair"></div>
+        <div class="c1-pair"></div>
+      </div>
+
+      <!-- QF LEFT -->
+      <div class="round r2">
+        <div class="matchup" id="m-qffc">
+          <button class="btn tbd" data-mid="qffc" data-ti="0">TBD</button>
+          <button class="btn tbd" data-mid="qffc" data-ti="1">TBD</button>
+        </div>
+        <div class="matchup" id="m-qfsd">
+          <button class="btn tbd" data-mid="qfsd" data-ti="0">TBD</button>
+          <button class="btn tbd" data-mid="qfsd" data-ti="1">TBD</button>
+        </div>
+      </div>
+
+      <!-- C2-L: QF → SF (conn-pair centred by spacers) -->
+      <div class="conn-col">
+        <div class="c2-spacer"></div>
+        <div class="c2-pair">
+          <div class="conn-top"></div>
+          <div class="conn-bot"></div>
+        </div>
+        <div class="c2-spacer"></div>
+      </div>
+
+      <!-- SF LEFT -->
+      <div class="round r3">
+        <div class="matchup" id="m-sfl">
+          <button class="btn tbd" data-mid="sfl" data-ti="0">TBD</button>
+          <button class="btn tbd" data-mid="sfl" data-ti="1">TBD</button>
+        </div>
+      </div>
+
+      <!-- SF → FINAL connector left -->
+      <div class="sf-conn"><div class="sf-conn-line"></div></div>
+
+    </div><!-- /left-side -->
+
+    <!-- ════ CENTER ═══════════════════════════════════════ -->
+    <div class="bracket-center">
+      <div class="final-section">
+        <div class="final-label">⚑ Championship</div>
+        <div class="matchup" id="m-final">
+          <button class="btn tbd" data-mid="final" data-ti="0">TBD</button>
+          <button class="btn tbd" data-mid="final" data-ti="1">TBD</button>
+        </div>
+      </div>
+      <div class="champ-box" id="champ-box">
+        <div class="trophy">🏆</div>
+        <div class="champ-label">Champion</div>
+        <div class="champ-name" id="champ-name"></div>
+      </div>
+    </div>
+
+    <!-- ════ RIGHT SIDE ═══════════════════════════════════ -->
+    <!--
+      Visual order left→right: sf-conn-R | SF-R | C2-R | QF-R | C1-R | R1-R
+      flex-direction: row (not reversed) keeps DOM = visual order.
+    -->
+    <div class="side right-side" style="display:flex;align-items:stretch;flex:1;">
+
+      <!-- SF → FINAL connector right -->
+      <div class="sf-conn"><div class="sf-conn-line"></div></div>
+
+      <!-- SF RIGHT -->
+      <div class="round r3">
+        <div class="matchup" id="m-sfr">
+          <button class="btn tbd" data-mid="sfr" data-ti="0">TBD</button>
+          <button class="btn tbd" data-mid="sfr" data-ti="1">TBD</button>
+        </div>
+      </div>
+
+      <!-- C2-R: QF → SF -->
+      <div class="conn-col">
+        <div class="c2-spacer"></div>
+        <div class="c2-pair">
+          <div class="conn-top"></div>
+          <div class="conn-bot"></div>
+        </div>
+        <div class="c2-spacer"></div>
+      </div>
+
+      <!-- QF RIGHT -->
+      <div class="round r2">
+        <div class="matchup" id="m-qfbk">
+          <button class="btn tbd" data-mid="qfbk" data-ti="0">TBD</button>
+          <button class="btn tbd" data-mid="qfbk" data-ti="1">TBD</button>
+        </div>
+        <div class="matchup" id="m-qfsn">
+          <button class="btn tbd" data-mid="qfsn" data-ti="0">TBD</button>
+          <button class="btn tbd" data-mid="qfsn" data-ti="1">TBD</button>
+        </div>
+      </div>
+
+      <!-- C1-R: R1 → QF -->
+      <div class="conn-col">
+        <div class="c1-pair"></div>
+        <div class="c1-pair"></div>
+      </div>
+
+      <!-- R1 RIGHT -->
+      <div class="round r1">
+        <div class="matchup" id="m-r1bk1">
+          <button class="btn" data-mid="r1bk1" data-ti="0">Muffins</button>
+          <button class="btn" data-mid="r1bk1" data-ti="1">Croissants</button>
+        </div>
+        <div class="matchup" id="m-r1bk2">
+          <button class="btn" data-mid="r1bk2" data-ti="0">Cakes</button>
+          <button class="btn" data-mid="r1bk2" data-ti="1">Cookies</button>
+        </div>
+        <div class="matchup" id="m-r1sn1">
+          <button class="btn" data-mid="r1sn1" data-ti="0">Choc. Almonds</button>
+          <button class="btn" data-mid="r1sn1" data-ti="1">Dried Mangos</button>
+        </div>
+        <div class="matchup" id="m-r1sn2">
+          <button class="btn" data-mid="r1sn2" data-ti="0">Kettle Chips</button>
+          <button class="btn" data-mid="r1sn2" data-ti="1">PB Pretzels</button>
+        </div>
+      </div>
+
+    </div><!-- /right-side -->
+
+  </div><!-- /bracket-row -->
+</div><!-- /bracket-shell -->
+</div><!-- /scroll-wrapper -->
+
+<!-- ══ CONTROLS ═══════════════════════════════════════════ -->
+<div class="controls">
+  <button class="reset-btn" id="reset-btn">⟳ Reset Bracket</button>
+</div>
+
+<!-- ══ CELEBRATION ════════════════════════════════════════ -->
+<div class="overlay" id="overlay" style="display:none">
+  <div class="overlay-card">
+    <div class="cel-trophy">🏆</div>
+    <div class="cel-heading">We Have a Champion!</div>
+    <div class="cel-sub">2026 Kirkland Signature Bracket</div>
+    <div class="cel-winner" id="cel-name"></div>
+    <button class="cel-close" id="cel-close">Close</button>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   BRACKET STATE
+════════════════════════════════════════════════════════════ */
+
+/*
+  Bracket data structure:
+    teams[0], teams[1] — the two competitors (null = TBD)
+    winner             — null | 0 | 1  (index into teams[])
+*/
+function freshState() {
+  return {
+    r1fc1: { teams: ['Pizza',                  'Chicken Bake'],         winner: null },
+    r1fc2: { teams: ['Sundae',                 'Hot Dog'],              winner: null },
+    r1sd1: { teams: ['Rotisserie Chicken',     'Mac & Cheese'],         winner: null },
+    r1sd2: { teams: ['Pot Pie',                'Chicken Street Tacos'], winner: null },
+    r1bk1: { teams: ['Muffins',               'Croissants'],            winner: null },
+    r1bk2: { teams: ['Cakes',                 'Cookies'],               winner: null },
+    r1sn1: { teams: ['Choc. Almonds',         'Dried Mangos'],          winner: null },
+    r1sn2: { teams: ['Kettle Chips',          'PB Pretzels'],           winner: null },
+    qffc:  { teams: [null, null], winner: null },
+    qfsd:  { teams: [null, null], winner: null },
+    qfbk:  { teams: [null, null], winner: null },
+    qfsn:  { teams: [null, null], winner: null },
+    sfl:   { teams: [null, null], winner: null },
+    sfr:   { teams: [null, null], winner: null },
+    final: { teams: [null, null], winner: null },
+  };
+}
+
+/*
+  Propagation map: when a winner is chosen from `mid`,
+  which matchup slot does the winner advance to?
+*/
+const NEXT = {
+  r1fc1: { mid: 'qffc',  slot: 0 },
+  r1fc2: { mid: 'qffc',  slot: 1 },
+  r1sd1: { mid: 'qfsd',  slot: 0 },
+  r1sd2: { mid: 'qfsd',  slot: 1 },
+  r1bk1: { mid: 'qfbk',  slot: 0 },
+  r1bk2: { mid: 'qfbk',  slot: 1 },
+  r1sn1: { mid: 'qfsn',  slot: 0 },
+  r1sn2: { mid: 'qfsn',  slot: 1 },
+  qffc:  { mid: 'sfl',   slot: 0 },
+  qfsd:  { mid: 'sfl',   slot: 1 },
+  qfbk:  { mid: 'sfr',   slot: 0 },
+  qfsn:  { mid: 'sfr',   slot: 1 },
+  sfl:   { mid: 'final', slot: 0 },
+  sfr:   { mid: 'final', slot: 1 },
+};
+
+let S = freshState();
+
+/* ════════════════════════════════════════════════════════════
+   PICK A WINNER
+════════════════════════════════════════════════════════════ */
+function pick(mid, ti) {
+  const m = S[mid];
+  if (!m || m.teams[ti] === null) return;
+
+  const prevWinner = m.winner;
+  m.winner = ti;
+
+  const nxt = NEXT[mid];
+  if (!nxt) { render(); showChamp(); return; }
+
+  // If the pick changed, cascade-clear the old winner's downstream path
+  if (prevWinner !== null && prevWinner !== ti) {
+    cascadeClear(nxt.mid, nxt.slot);
+  }
+
+  // Write the new winner into the next round's slot
+  S[nxt.mid].teams[nxt.slot] = m.teams[ti];
+
+  render();
+  if (mid === 'final') setTimeout(showChamp, 300);
+}
+
+/* Recursively null-out a slot and anything downstream of it */
+function cascadeClear(mid, slot) {
+  const m = S[mid];
+  if (!m) return;
+  m.teams[slot] = null;
+  if (m.winner === slot) {
+    m.winner = null;
+    const nxt = NEXT[mid];
+    if (nxt) cascadeClear(nxt.mid, nxt.slot);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   RENDER
+════════════════════════════════════════════════════════════ */
+function render() {
+  for (const [mid, m] of Object.entries(S)) {
+    document.querySelectorAll(`[data-mid="${mid}"]`).forEach(btn => {
+      const ti = +btn.dataset.ti;
+      const name = m.teams[ti];
+
+      btn.className = 'btn';
+      btn.disabled = false;
+
+      if (name === null) {
+        btn.textContent = 'TBD';
+        btn.classList.add('tbd');
+        btn.disabled = true;
+        return;
+      }
+
+      btn.textContent = name;
+
+      if (m.winner === null) {
+        /* ready to click — default style */
+      } else if (m.winner === ti) {
+        btn.classList.add('winner');
+      } else {
+        btn.classList.add('loser');
+        btn.disabled = true;
+      }
+    });
+  }
+
+  // Champion display
+  const fw = S.final.winner;
+  const nameEl = document.getElementById('champ-name');
+  const box    = document.getElementById('champ-box');
+  if (fw !== null) {
+    nameEl.textContent = S.final.teams[fw];
+    box.classList.add('crowned');
+  } else {
+    nameEl.textContent = '';
+    box.classList.remove('crowned');
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   CELEBRATION
+════════════════════════════════════════════════════════════ */
+function showChamp() {
+  const fw = S.final.winner;
+  if (fw === null) return;
+  document.getElementById('cel-name').textContent = S.final.teams[fw];
+  document.getElementById('overlay').style.display = 'flex';
+}
+
+/* ════════════════════════════════════════════════════════════
+   EVENT LISTENERS
+════════════════════════════════════════════════════════════ */
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.btn');
+  if (!btn || btn.disabled || btn.classList.contains('tbd')) return;
+  pick(btn.dataset.mid, +btn.dataset.ti);
+});
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  S = freshState();
+  document.getElementById('overlay').style.display = 'none';
+  render();
+});
+
+document.getElementById('cel-close').addEventListener('click', () => {
+  document.getElementById('overlay').style.display = 'none';
+});
+
+/* ════════════════════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════════════════════ */
+render();
+</script>
+</body>
+</html>
